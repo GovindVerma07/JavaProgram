@@ -1,0 +1,282 @@
+1. Write a program to remove duplicates from a String. 
+Ans. public class RemoveDuplicate {
+    public static void main(String[] args){
+     String str1 = "coca cola";
+     String str2 = "";
+     for(int i = 0; i < str1.length(); i++){
+        boolean found = false;
+        for(int j = 0; j < str2.length(); j++){
+            if(str1.charAt(i) == str2.charAt(j)){
+                found = true;
+                break;
+            }
+        }
+        if(found == false){
+            str2 = str2 + str1.charAt(i);
+        }
+     }
+     System.out.println(str2);
+    }
+}
+
+2. Write a program to print duplicates characters from a String.
+Ans. public class DuplicateInAString {
+    public static void main(String[] args) {
+        String str1 = "abbcdabca";
+        String str2 = "";
+        for(int i = 0; i < str1.length(); i++){
+            boolean dup = false;
+            for(int j = i+1; j < str1.length(); j++){
+                if(str1.charAt(i) == str1.charAt(j)){
+                    dup = true;
+                    break;
+                }
+            }
+            if(dup){
+                str2 = str2 + str1.charAt(i);
+            }
+        }
+        char[] arr = str2.toCharArray();
+        for(int p = 0; p < arr.length; p++){
+            boolean temp = false;
+            for(int q = p+1; q<arr.length; q++){
+                if(arr[p] == arr[q]){
+                   temp = true;
+                   break;
+                }
+            }
+            if(temp == false){
+               System.out.print(arr[p]+" ");  
+            }
+           System.out.println();
+        }
+        System.out.println("Duplicate string : "+str2);
+    }
+}
+
+3. WAP to check if "2552" is palindrome of not.
+Ans. public class PalindromeString {
+    public static void main(String[] args) {
+        String str = "2552";
+        int i = 0;
+        int j = str.length()-1;
+        boolean b = false;
+        for(int p = 0; p < str.length(); p++){
+        if(str.charAt(i) != str.charAt(j)){
+            b = true;
+            break;
+        }
+        i++;
+        j--;
+    }
+    if(b == false){
+        System.out.println("Palindrome");
+    }
+    else{
+        System.out.println("Not Palindrome");
+    }
+    }
+}
+
+4. WAP to count the number of consonants, vowels, special characters in a String.
+Ans. import java.util.Scanner;
+
+class Count{
+  public static void Method(String str){
+    int vowels = 0, consonants = 0, specialChar = 0, digits = 0;
+    for(int i = 0; i < str.length(); i++){
+     char ch = str.charAt(i);
+     if(ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z'){
+        ch = Character.toLowerCase(ch);
+        if(ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u'){
+            vowels++;
+        }
+        else{
+            consonants++;
+        }
+     }
+     else if(ch >= '0' && ch <= '9'){
+        digits++;
+     }
+     else{
+        specialChar++;
+     }
+    }
+    System.out.print("Vowels in string are : "+vowels+"\n");
+    System.out.print("Consonants in string are : "+consonants+"\n");
+    System.out.print("Special Characters in string are : "+specialChar);
+
+  }
+}
+public class CountString {
+    public static void main(String[] args){
+    Scanner scan = new Scanner(System.in);
+    System.out.println("Enter a String : ");
+    String str = scan.nextLine();
+    Count.Method(str);
+
+    }
+}
+
+5. WAP to implement Anagram checking least inbuilt methods being used.
+Ans. public class CheckingAnagram {
+    public static void main(String[] args){
+        String str1 = "School Master";
+        String str2 = "The Classroom";
+        char[] arr1 = new char[str1.length()];
+        char[] arr2 = new char[str2.length()];
+        boolean b = false;
+        str1 = str1.toLowerCase();
+        str2 = str2.toLowerCase();
+        for(int i = 0; i < str1.length(); i++){
+         arr1[i] = str1.charAt(i);
+         arr2[i] = str2.charAt(i);
+        }
+        for(int i = 0; i < arr1.length; i++){
+            for(int j = i; j < arr1.length; j++){
+                if(arr1[j] < arr1[i]){
+                    char ch;
+                    ch = arr1[j];
+                    arr1[j] = arr1[i];
+                    arr1[i] = ch;
+                }
+            }
+        }
+        for(int i = 0; i < arr2.length; i++){
+            for(int j = i; j < arr2.length; j++){
+                if(arr2[j] < arr2[i]){
+                    char ch;
+                    ch = arr2[j];
+                    arr2[j] = arr2[i];
+                    arr2[i] = ch;
+                }
+            }
+        }
+        if(arr1.length == arr2.length){
+        for(int i = 0; i < arr1.length; i++){
+            if(arr1[i] != arr2[i]){
+              b = true;
+              break;
+            }
+        }
+    }
+    else{
+        System.out.println("Not Anagram");
+    }
+    if(!b){
+        System.out.println("Anagram");
+    }
+    else{
+        System.out.println("Not Anagram");
+    }
+    }
+}
+
+6. WAP to implement Pangram checking with least inbuilt methods being used.
+Ans. public class CheckingPangram {
+    public static void main(String[] args){
+        String str = "The quick brown Fox jumps over lazy Dog";
+        str = str.toUpperCase();
+        str = str.replace(" ", "");
+        char[] ch = new char[str.length()];
+        int[] arr = new int[26];
+        boolean b = false;
+        for(int i = 0; i < str.length(); i++){
+            ch[i] = str.charAt(i);
+        }
+        for(int i = 0; i < ch.length; i++){
+            arr[ch[i] - 65]++;
+        }
+        for(int j = 0; j < arr.length; j++){
+            if(arr[j] == 0){
+             b = true;
+             break;
+            }
+        }
+        if(!b){
+            System.out.println("Pangram");
+        }
+        else{
+            System.out.println("Not Pangram");
+        }
+    }
+}
+
+7. WAP to find if String contains all unique characters.
+Ans. public class UniqueCharString {
+    public static void main(String[] args){
+        String str = "Hey Bro";
+        boolean flag = false;
+        str = str.toLowerCase();
+        str = str.replace(" ","");
+        char[] arr = str.toCharArray();
+        for(int i = 0; i < arr.length; i++){
+            for(int j = i; j < arr.length; j++){
+                if(arr[j] < arr[i]){
+                    char ch = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = ch;
+                }
+            }
+        }
+        for(int p = 0; p < arr.length-1; p++){
+            if(arr[p] == arr[p+1]){
+                flag = true;
+                break;
+            }
+        }
+        if(!flag){
+          System.out.println("String contain all unique characters");
+        }
+        else{
+            System.out.println("String doesn't contain all unique characters");
+        }
+    }
+}
+
+8. WAP to find the maximum occuring character in a string.
+Ans. public class MaxOccrChar {
+    public static void main(String[] args){
+      String str = "Hello Collegians";
+      str = str.toUpperCase();
+      str = str.replace(" ","");
+      char[] arr = str.toCharArray();
+      int[] arr2 = new int[26];
+      int[] arr3 = new int[26];
+      for(int i = 0; i < arr.length; i++){
+        for(int j = i; j < arr.length; j++){
+            if(arr[i] > arr[j]){
+                char ch = arr[i];
+                arr[i] = arr[j];
+                arr[j] = ch;
+            }
+        }
+      }
+      for(int i = 0; i < arr.length-1; i++){
+        if(arr[i] == arr[i+1]){
+            arr2[arr[i+1] - 'A']++;
+        }
+      }
+      for(int p = 0; p < arr2.length; p++){
+          arr3[p] = arr2[p];
+        }
+        for(int i = 0; i < arr3.length; i++){
+            for(int j = i; j < arr3.length; j++){
+                if(arr3[i] > arr3[j]){
+                    int in = arr3[i];
+                    arr3[i] = arr3[j];
+                    arr3[j] = in;
+                }
+            }
+        }
+        int ele = 0;
+         for(int i = 0; i < arr2.length; i++){
+            if(arr2[i] == arr3[arr3.length-1]){
+              ele = i;
+            }
+         }
+         char c = (char)ele;
+         c += 'a';
+         System.out.println("Maximum occurring character in a given string is "+c);
+      }
+    }
